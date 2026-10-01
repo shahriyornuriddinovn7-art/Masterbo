@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: maker-bot
+    runtime: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: maker-db
+          property: connectionString
+databases:
+  - name: maker-db
+    plan: free
